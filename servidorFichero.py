@@ -16,7 +16,7 @@ def server():
     while True:
         #Envia la lista de proyectos
 	connect = sock.recv()
-	
+	sock.send(len(proyects))
 	for p in proyects:
             sock.send(p)
 
