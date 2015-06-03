@@ -15,7 +15,10 @@ def server():
     #Inicia el servidor
     while True:
         #Envia la lista de proyectos
-        sock.send(proyects)
+	connect = sock.recv()
+	
+	for p in proyects:
+            sock.send(p)
 
         #Recive el nombre del proyecto seleccionado
         msg = sock.recv()
