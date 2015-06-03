@@ -11,7 +11,7 @@ def server():
 
     #Definimos los proyectos
     proyects = ['proyecto1', 'proyecto2', 'proyecto3']
-
+	files = ['p1.py', 'p2.py', 'p3.py']
     #Inicia el servidor
     while True:
         #Envía la lista de proyectos
@@ -23,9 +23,11 @@ def server():
             sock.send('No ha elegido un proyecto valido')
         else:
             #Alhama modifica esto
-            fn = open(msg, 'rb')
+			pos=proyects.index(msg)
+			file=files[pos]
+            fn = open(file, 'rb')
             stream = True
-
+			sock.send(file)
             while stream:
                 stream = fn.read(128)
                 if stream:
