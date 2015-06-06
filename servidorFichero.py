@@ -8,18 +8,32 @@ def server():
     # Levantamos el contexto de ZMQ y el socket REP
     context = zmq.Context()
     sock = context.socket(zmq.PAIR)
-    sock.bind('tcp://*:4545')
-
     #Definimos los proyectos
-    proyects = ['proyecto1', 'proyecto2', 'proyecto3']
-    files = ['p1.py', 'p2.py', 'p3.py']
+    sock.bind('tcp://*:4545')
+    f = open('proyectos.txt')
+    proyects = f.read()
+    f.close();
+    proyects = proyects.split('\n')
+    print proyects
+    f = open('fproyectos.txt')
+    files = f.read()
+    f.close();
+    files = files.split('\n')
     #Inicia el servidor
     while True:
        try:
             #Envia la lista de proyectos
     	    connect = sock.recv()
     	    print connect
-    	    print 'hola'
+    	    f = open('proyectos.txt')
+            proyects = f.read()
+            f.close();
+            proyects = proyects.split('\n')
+            print proyects
+            f = open('fproyectos.txt')
+            files = f.read()
+            f.close();
+            files = files.split('\n')
     	    sock.send(str(len(proyects)))
     	    
     	    for p in proyects:
@@ -31,7 +45,8 @@ def server():
             #Alhama modifica esto
     	    pos=proyects.index(msg)
     	    file = files[pos]
-    	    fn = open(file, 'rb')
+    	    if os.path.exists('files'+file)==False:
+    	        fn = open('./ClienteServidor/'+file, 'rb')
     
     	    sock.send(file)
     	    sock.send(fn.read())

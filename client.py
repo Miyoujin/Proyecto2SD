@@ -32,7 +32,6 @@ if exeP==2:
     sock.send(msg)
     #ahora recibimos el numero de proyectos
     n_proyectos = int(sock.recv())
-    print (n_proyectos)
     #creo una lista para los nombres de los proyectos
     lista = []
     #recibimos los nombres de los proyectos y los guardamos en una lista
@@ -63,8 +62,7 @@ if exeP==2:
     msg=sock.recv()
     
         
-    archivo = open('./files/'+nombre_fichero,'w')
-    print msg
+    archivo = open('files/'+nombre_fichero,'w')
     archivo.write(msg)
     #cerramos el fichero
     archivo.close()
@@ -75,8 +73,9 @@ else:
     while fselec>len(filesInDir) or fselec<1:
         fselec=input()
     nombre_fichero=filesInDir[fselec-1]
-    
-execfile(nombre_fichero)
+
+print 'Ejecutando proyecto'+nombre_fichero    
+execfile('files/'+nombre_fichero)
 
 
 
