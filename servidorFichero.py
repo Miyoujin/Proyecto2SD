@@ -45,11 +45,13 @@ def server():
             #Alhama modifica esto
     	    pos=proyects.index(msg)
     	    file = files[pos]
-    	    if os.path.exists('files'+file)==False:
-    	        fn = open('./ClienteServidor/'+file, 'rb')
-    
-    	    sock.send(file)
-    	    sock.send(fn.read())
+    	    if os.path.exists('ClienteServidor/'+file)==True:
+    	        fn = open('ClienteServidor/'+file, 'rb')
+    	        sock.send(file)
+    	        sock.send(fn.read())
+    	    else:
+    	        sock.send('')
+    	        
        except ValueError:
            print 'Ha ocurrido un error'
            sock.send('')

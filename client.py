@@ -57,15 +57,15 @@ if exeP==2:
     #recibimos el nombre del fichero
     nombre_fichero = sock.recv()
     #creamos un fichero con el nombre que recibimos
-    
-    #escribimos en el fichero lo que recibimos del servidor
-    msg=sock.recv()
-    
+    if len(nombre_fichero)>0:
+        #escribimos en el fichero lo que recibimos del servidor
+        msg=sock.recv()
         
-    archivo = open('files/'+nombre_fichero,'w')
-    archivo.write(msg)
-    #cerramos el fichero
-    archivo.close()
+            
+        archivo = open('files/'+nombre_fichero,'w')
+        archivo.write(msg)
+        #cerramos el fichero
+        archivo.close()
 else:
     print 'Estos son los proyectos ya descargados'
     print filesInDir
@@ -74,8 +74,9 @@ else:
         fselec=input()
     nombre_fichero=filesInDir[fselec-1]
 
-print 'Ejecutando proyecto'+nombre_fichero    
-execfile('files/'+nombre_fichero)
+if len(nombre_fichero)>0:
+    print 'Ejecutando proyecto'+nombre_fichero    
+    execfile('files/'+nombre_fichero)
 
 
 
